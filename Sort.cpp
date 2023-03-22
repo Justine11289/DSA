@@ -84,7 +84,7 @@ int main(){
     int *A = new int[n+1];
     A[0] = 0; 
     int tmp1[n+1],tmp2[n+1];
-    for(int i = 1; i <= n; i++){A[i] = (rand()+rand())%50000+1;}
+    for(int i = 1; i <= n; i++){A[i] = (rand()*2)%50000+1;}
     for(int i = 1; i <= n; i++){
         tmp1[i] = A[i];
         tmp2[i] = A[i];
