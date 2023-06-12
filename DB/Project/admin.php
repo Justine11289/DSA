@@ -20,16 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // 執行登入的SQL語句
-    $sql = "SELECT * FROM `user` WHERE `account`   = '$phone' AND `password` = '$password1'";
+    $sql = "SELECT * FROM `admin` WHERE `admin_name`   = '$phone' AND `admin_password` = '$password1'";
 
     $result = $conn->query($sql);
 
-    $query = "SELECT `user_id` FROM `user` WHERE `account`   = '$phone' AND `password` = '$password1'";
+    $query = "SELECT `admin_id` FROM `admin` WHERE `admin_name`   = '$phone' AND `admin_password` = '$password1'";
     $result = $conn->query($query);
     
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $userID = $row['user_id'];
+        $userID = $row['admin_id'];
     } else {
         $userID = ""; // 如果未找到匹配的结果，可以设置一个默认值或采取其他适当的操作
     }
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BAR HOPPER Login</title>
+    <title>BAR HOPPER Admin</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -111,9 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" name="password1" required placeholder="輸入密碼" style="font-size: 20px;">
             <br>
             <input type="submit" name="login" value="登錄" /></br>
+            <a href="login.php">使用者登入</a>
             <br>
-            <a href="register.php">註冊</a>
-            <a href="admin.php">管理者登入</a>
 
             <?php
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -121,11 +120,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result->num_rows > 0) {
             // 登入成功，儲存使用者ID至Session
             $row = $result->fetch_assoc();
-            $_SESSION['user_id'] = $userID;
-            $_SESSION['user_name'] = $row['user_name'];
-            $_SESSION['permission'] = 'B';
+            $_SESSION['admin_id'] = $row['admin_id'];
+            $_SESSION['admin_name'] = $row['admin_name'];
+            $_SESSION['permission'] = 'A';
+            $p=$_SESSION['permission'];
             
-            header("Location:Bar_search.php?cid=$userID&rid=$userID"); // 登入後導向首頁
+            header("Location:change.php?cid=$userID&rid=$userID&p=$p"); // 登入後導向首頁
             exit();
           } else {
             echo '<p>登入失敗，請檢查帳號和密碼。</p>';

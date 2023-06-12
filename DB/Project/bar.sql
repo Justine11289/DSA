@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2023-06-12 14:56:35
+-- 產生時間： 2023-06-11 03:14:13
 -- 伺服器版本： 10.4.28-MariaDB
 -- PHP 版本： 8.0.28
 
@@ -29,15 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `admin_id` int(5) NOT NULL,
-  `account` varchar(10) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `admin_name` varchar(10) NOT NULL,
+  `admin_password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- 傾印資料表的資料 `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `account`, `password`) VALUES
+INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_password`) VALUES
 (1, '黃子庭', 'B0843042');
 
 -- --------------------------------------------------------
@@ -1339,8 +1339,7 @@ CREATE TABLE `record` (
 --
 
 INSERT INTO `record` (`record_time`, `user_id`, `bar_id`, `bar_score`, `opinion`) VALUES
-('2023-06-11 02:51:41', 1, 1, 3, '距離太遠了，下次來要注意交通時間'),
-('2023-06-12 10:23:19', 1, 13, 2, '店員態度差 下次不來了');
+('2023-06-11 02:51:41', 1, 1, 3, '距離太遠了，下次來要注意交通時間');
 
 -- --------------------------------------------------------
 
